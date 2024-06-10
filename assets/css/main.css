@@ -1,0 +1,92 @@
+body{
+    overflow-x: hidden;
+}
+.logo-hero{
+    width: 200px;
+}
+.hero-icon-redes{
+    width: 50px;
+    height: 50px;    
+}
+.hero-icon-redes a{
+    color: #212529;
+}
+.hero-icon-redes:hover{
+    background-color: #3f5f36;
+     a{
+        transform: scale(1.2) rotateY(360deg);
+        color: aliceblue;
+    }
+}
+.hero-icon-redes a{
+    transition: transform .5s;
+}
+.hero-icon-redes a:hover{
+    transform: scale(1.2) rotateY(360deg);
+    color: aliceblue;
+}
+.hero-icon-redes a{
+    text-decoration: none;
+}
+
+.navbar-toggler i{
+    outline: transparent;
+    border: none;
+}
+.decoration-bar{
+    width: 10%;
+    height: 2px;
+    background-color: #3f5f36;
+    margin: 24px auto;
+}
+.animais-extintos{
+    background-image: url('../imagens/animalonca.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.risco-extincao-img{
+    width: 100%;
+    padding: 32px;
+}
+.card{
+    transition: transform .5s;
+}
+.card:hover{
+    transform: scale(1.1);
+    z-index: 1;
+    background-color: black;
+    color: white;
+}
+.selva{
+    background-image: url('../imagens/texturamata.jpeg');
+    background-attachment: fixed;
+}
+
+/* Página ong */
+
+.img-ong{
+    max-width: 100%;
+    outline: hidden;
+    object-fit: cover;
+}
+
+/* Página contato */
+
+form textarea{
+    resize: none;
+}
+/* Página blog - registro */
+.img-blog{
+    max-height: 400px;
+    max-width: 400px;
+    object-fit: cover;
+}
+
+.hide{
+    display: none;
+}
+
+.link-sair{
+    cursor: pointer;
+}
