@@ -71,6 +71,9 @@
               <li><a class="dropdown-item" href="#">Selvagens</a></li>
             </ul>
           </li>
+          <li class="nav-item link-admin">
+            <a href="admin.html" class="nav-link">Admin</a>
+          </li>
           <li class="nav-item link-sair">
             <a class="nav-link">Sair</a>
           </li>
@@ -84,7 +87,7 @@
   </nav>
   <!-- Final da navegação -->
   <div class="container mt-5">
-    <h2 class="text-center text-success">ACESSO AO ADMINISTRADOR DO SISTEMA</h2>
+    <h2 class="text-center text-success titulo-login">ACESSO AO ADMINISTRADOR DO SISTEMA</h2>
     <div class="decoration-bar mb-5"></div>
     <form class="form-login">
       <input type="text" class="emailAdmin form-control" placeholder="Informe o seu e-mail...">
@@ -110,6 +113,9 @@
     <div class="decoration-bar"></div>
   </footer>
 
+  <!-- Firebase -->
+  <script src="./assets/js/firebase.js" type="module"></script>
+  <script src="./assets/js/auth.js" type="module"></script>
 
   <!-- JQuery -->
   <script src="assets/js/jquery.js"></script>
@@ -120,8 +126,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 
-  <script src="./assets/js/firebase.js" type="module"></script>
-  <script src="./assets/js/auth.js" type="module"></script>
+  
 </body>
 
 </html>
