@@ -75,7 +75,7 @@
             <a href="admin.html" class="nav-link">Admin</a>
           </li>
           <li class="nav-item link-sair">
-            <a class="nav-link">Sair</a>
+            <a class="nav-link text-danger">Sair</a>
           </li>
         </ul>
         <!-- <form class="d-flex" role="search">
@@ -99,13 +99,19 @@
 
   <div class="form-post container">
     <!-- titulo, imagem, conteudo, data e autor -->
-    <input type="text" class="form-control my-3" placeholder="Informe o título...">
-    <input type="file" class="form-control mb-3" placeholder="Selecione a imagem...">
-    <textarea class="form-control mb-3" rows="20" placeholder="Desenvolva um texto aqui!"></textarea>
-    <input type="date" class="form-control mb-3" placeholder="Informe a data...">
-    <input type="text" class="form-control mb-3" placeholder="Informe o autor...">
-    <button class="btn btn-success form-control">Postar</button>
+    <input type="text" class="form-control my-3 titulo-post " placeholder="Informe o título...">
+    <input type="file" class="form-control mb-3 imagem-post" placeholder="Selecione a imagem...">
+    <textarea class="form-control mb-3 mensagem-post" rows="20" placeholder="Desenvolva um texto aqui!"></textarea>
+    <input type="date" class="form-control mb-3 data-publicacao-post" placeholder="Informe a data...">
+    <input type="text" class="form-control mb-3 autor-post" placeholder="Informe o autor...">
+    <button class="btn btn-success form-control send-post">Postar</button>
   </div>
+
+  <div class="gerenciador-conteudos container my-5" >
+    <!-- Uma lista com botões para editar e apagar aqui -->
+  </div>
+
+  
 
   <footer class="pt-5 text-center">
     <div class="decoration-bar"></div>
@@ -116,6 +122,7 @@
   <!-- Firebase -->
   <script src="./assets/js/firebase.js" type="module"></script>
   <script src="./assets/js/auth.js" type="module"></script>
+  <script type="module" src="./assets/js/database.js"></script>
 
   <!-- JQuery -->
   <script src="assets/js/jquery.js"></script>
