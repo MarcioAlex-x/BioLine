@@ -90,3 +90,7 @@ form textarea{
 .link-sair{
     cursor: pointer;
 }
+
+.mensagens{
+    height: 32px;
+}
