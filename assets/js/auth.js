@@ -10,21 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tituloLogin = document.querySelector('.titulo-login')
     const mensagens = document.querySelector('.mensagens')
 
-    // mensagens
-    const logadoSucesso = () =>{
-        mensagens.innerHTML = 'Usuário logado com sucesso.'
-    }
-
-    const verifiqueConexao = () =>{
-        mensagens.innerHTML = 'Verifique a sua conexão ou o seu email e senha.'
-    }
-
-    const logoutSucesso = () =>{
-        mensagens.innerHTML = 'Logout realizado com sucesso.'
-    }
-
-    const erroInesperado = () =>{
-        mensagens.innerHTML = 'Ocorreu um erro inesperado.'
+    const alertaUsuario = (alerta) =>{
+        mensagens.innerHTML = alerta
     }
 
     // Limpar mensagem
@@ -33,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mensagens.innerHTML = ''
         }, 3000)
     }
-
 
     // Evento de login
     if (formLogin) {
@@ -45,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
             signInWithEmailAndPassword(auth, email, senha)
                 .then((userCredential) => {
                     const user = userCredential.user
-                    logadoSucesso()
+                    alertaUsuario('Usuário logado com sucesso.')                    
                     limparMensagem()
                     emailInput.value = ''
                     senhaInput.value = ''
                 })
                 .catch(() => {
-                    verifiqueConexao()
+                    alertaUsuario('Verifique a sua conexão ou o seu email e senha.')
                     limparMensagem()
                 })
         })
@@ -62,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         linkSair.addEventListener('click', () => {
             signOut(auth)
                 .then(()=>{
-                    logoutSucesso()
+                    alertaUsuario('Logout realizado com sucesso.')
                     limparMensagem()
                 })
                 .catch(()=>{
-                    erroInesperado()
+                    alertaUsuario('Ocorreu um erro inesperado.')                    
                     limparMensagem()
                 })
         })
