@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         mensagens.innerHTML = 'Ocorreu um erro inesperado.'
     }
 
+    // Limpar mensagem
+    const limparMensagem = () =>{
+        setInterval(()=>{
+            mensagens.innerHTML = ''
+        }, 3000)
+    }
 
 
     // Evento de login
@@ -40,11 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then((userCredential) => {
                     const user = userCredential.user
                     logadoSucesso()
+                    limparMensagem()
                     emailInput.value = ''
                     senhaInput.value = ''
                 })
                 .catch(() => {
                     verifiqueConexao()
+                    limparMensagem()
                 })
         })
     }
@@ -55,9 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
             signOut(auth)
                 .then(()=>{
                     logoutSucesso()
+                    limparMensagem()
                 })
                 .catch(()=>{
                     erroInesperado()
+                    limparMensagem()
                 })
         })
     }
