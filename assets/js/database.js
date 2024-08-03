@@ -73,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     postElement.innerHTML = `
                         <h2 class="mt-5 fw-bold text-center text-success" >${post.titulo}</h2>
                         <div class="decoration-bar" ></div>
-
+                        <img="${post.imagemUrl}" alt="imagem de ${post.titulo}" class="img-blog my-5 img-fluid" />
+                        <p>${post.mensagem}</p>
+                        <p class="align-self-center mt-5" >Publicado em:${post.data} por ${post.autor}.</p>
+                        <hr/>
                     `
                     divConteudos.appendChild(postElement)
                 })
