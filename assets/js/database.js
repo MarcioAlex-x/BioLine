@@ -1,6 +1,6 @@
 import { database, storage } from "./firebase.js";
 // as significa um apelido ou seja databaseRef é o apelido de ref que é uma função do firebase
-import { set, ref as databaseRef, onValue } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"
+import { set, ref as databaseRef, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"
 import { ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const autorPost = document.querySelector('.autor-post')
     const sendPost = document.querySelector('.send-post')
     const divConteudos = document.querySelector('.conteudos')
+    const gerenciadorConteudos = document.querySelector('.gerenciador-conteudos')
     
 
     const postsRef = databaseRef(database, `posts`)
@@ -95,6 +96,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
     }
-    listarPosts()
 
+    const gerenciarPosts = (conteudos) =>{
+        onValue(postsRef,(snapshot)=>{
+            const posts = snapshot.val()
+            conteudos.innerHTML = ''
+            if(posts){
+                const postIds = Object.keys(posts).sort((a,b)=>b-a)
+                postIds.forEach((postId)=>{
+                    const post = posts[postId]
+                    const postElement = document.createElement('div')
+                    postElement.innerHTML=`
+                        <button class="btn btn-danger btn-sm mx-3 delete-post" data-id="${post.titulo}" >Apagar</button>
+                        <span class="fw-bold" >${post.titulo}</span>
+                        <hr/>
+                    `
+                    conteudos.appendChild(postElement)
+                })
+                document.querySelectorAll('.delete-post').forEach((button)=>{
+                    button.addEventListener('click',(e)=>{
+                        const postId = e.target.getAttribute('data-id')
+                        apagarPost(postId)
+                    })
+                })
+            }else{
+                conteudos.innerHTML = '<p class="mt-5" >Nenhum post encontrado.</p>'
+            }
+        })
+    }
+
+    const apagarPost = (postId)=>{
+        remove(databaseRef(database,`posts/${postId}`))
+            .then(()=>{
+                alert('Post removido com sucesso')
+                listarPosts(divConteudos)
+                gerenciarPosts(gerenciadorConteudos)
+                console.log(postId)
+            })
+            .catch((error)=>{
+                console.log(`Erro ao tentar apagar o post ${error}`)
+                alert('Erro ao tentar remover o post')
+            })
+    }
+
+    if(divConteudos){
+        listarPosts(divConteudos)
+    }
+    if(gerenciadorConteudos){
+        gerenciarPosts(gerenciadorConteudos)
+    }  
 })
