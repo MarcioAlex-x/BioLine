@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formPost = document.querySelector('.form-post')
     const tituloLogin = document.querySelector('.titulo-login')
     const mensagens = document.querySelector('.mensagens')
+    const gerenciadorConteudos = document.querySelector('.gerenciador-conteudos')
 
     // Função de alerta/mensagem
     const alertaUsuario = (alerta) =>{
@@ -70,11 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if(formLogin) formLogin.classList.add('hide')
             if(formPost) formPost.classList.remove('hide')
             if(tituloLogin) tituloLogin.innerHTML = 'ACESSO AO ADMINISTRADOR LIBERADO'
+            if(gerenciadorConteudos) gerenciadorConteudos.classList.remove('hide')
         }else{
             if(linkSair) linkSair.classList.add('hide')
             if(formLogin) formLogin.classList.remove('hide')
             if(formPost) formPost.classList.add('hide')
             if(tituloLogin) tituloLogin.innerHTML = 'FAÇA O LOGIN COMO ADMINISTRADOR!'
+            if(gerenciadorConteudos) gerenciadorConteudos.classList.add('hide')
         }
     })
 

@@ -14,20 +14,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendPost = document.querySelector('.send-post')
     const divConteudos = document.querySelector('.conteudos')
     const gerenciadorConteudos = document.querySelector('.gerenciador-conteudos')
+    const postCategoria = document.querySelector('.post-categoria')
+    const norte = document.querySelector('.norte')
+    const nordeste = document.querySelector('.nordeste')
+    const centroOeste = document.querySelector('.centro-oeste')
+    const sul = document.querySelector('.sul')
+    const sudeste = document.querySelector('.sudeste')
     
+    const dadosPost = (postElement, post) =>{
+        postElement.innerHTML = `
+            <h2 class="mt-5 fw-bold text-center text-success" >${post.titulo}</h2>
+            <div class="decoration-bar" ></div>
+            <img src="${post.imagemUrl}" alt="imagem de ${post.titulo}" class="img-blog my-5 img-fluid" />
+            <p>${post.mensagem}</p>
+            <p class="align-self-center mt-5" >Publicado em:${post.data} por ${post.autor}.</p>
+            <hr/>
+        `
+    }
 
     const postsRef = databaseRef(database, `posts`)
 
-    if (sendPost && tituloPost && mensagemPost && dataPublicacaoPost && autorPost && imagemPost) {
+    if (sendPost && tituloPost && mensagemPost && dataPublicacaoPost && autorPost && imagemPost && postCategoria) {
         
         // Grava as informações
-        const enviarPost = (postId, titulo, mensagem, data, autor, imagemUrl) => {
+        const enviarPost = (postId, titulo, mensagem, data, autor, imagemUrl, categoria) => {
             return set(databaseRef(database, `posts/${postId}`), {
                 titulo,
                 mensagem,
                 data,
                 autor,
-                imagemUrl
+                imagemUrl,
+                categoria
             })
         }
 
@@ -39,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = dataPublicacaoPost.value
             const autor = autorPost.value
             const imagem = imagemPost.files[0]
+            const categoria = postCategoria.value
 
             if (imagem) {
                 const imagemRef = storageRef(storage, `posts/${postId}/${imagem.name}`)
@@ -46,13 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then((snapshot) => {
                         getDownloadURL(snapshot.ref)
                             .then((url) => {
-                                enviarPost(postId, titulo, mensagem, data, autor, url)
+                                enviarPost(postId, titulo, mensagem, data, autor, url, categoria)
                                     .then(() => {
                                         tituloPost.value = ''
                                         mensagemPost.value = ''
                                         dataPublicacaoPost.value = ''
                                         autorPost.value = ''
                                         imagemPost.value = ''
+                                        postCategoria.value = ''
                                     })
                                     .catch((error) => {
                                         console.log(error)
@@ -64,11 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    const listarPosts = (conteudos) =>{
+    const listarPosts = (conteudos, categoria) =>{ 
         onValue(postsRef,(snapshot)=>{
             const posts = snapshot.val()
-            if( divConteudos){
-                divConteudos.innerHTML = ''
+            if( conteudos ){
+                conteudos.innerHTML = ''
             }
             
             if(posts){
@@ -76,22 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 postsIds.forEach((postId) =>{
                     const post = posts[postId]
                     const postElement = document.createElement('div')
-                    postElement.innerHTML = `
-                        <h2 class="mt-5 fw-bold text-center text-success" >${post.titulo}</h2>
-                        <div class="decoration-bar" ></div>
-                        <img src="${post.imagemUrl}" alt="imagem de ${post.titulo}" class="img-blog my-5 img-fluid" />
-                        <p>${post.mensagem}</p>
-                        <p class="align-self-center mt-5" >Publicado em:${post.data} por ${post.autor}.</p>
-                        <hr/>
-                    `
-                    if( divConteudos){
-                        divConteudos.appendChild(postElement)
+                    if(categoria === 'geral' || categoria === categoria){
+                        dadosPost(postElement, post)
+                    }
+                    
+                    if( conteudos ){
+                        conteudos.appendChild(postElement)
                     }
                    
                 })
             }else{
-                if(divConteudos){
-                    divConteudos.innerHTML='<p class="mt-5" >Nenhum post encontrado.</p>' 
+                if(conteudos){
+                    conteudos.innerHTML='<p class="mt-5" >Nenhum post encontrado.</p>' 
                 }
             }
         })
@@ -106,8 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 postIds.forEach((postId)=>{
                     const post = posts[postId]
                     const postElement = document.createElement('div')
+                    console.log(postId)
                     postElement.innerHTML=`
-                        <button class="btn btn-danger btn-sm mx-3 delete-post" data-id="${post.titulo}" >Apagar</button>
+                        <button class="btn btn-danger btn-sm mx-3 delete-post" data-id="${postId}" >Apagar</button>
                         <span class="fw-bold" >${post.titulo}</span>
                         <hr/>
                     `
@@ -140,8 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(divConteudos){
-        listarPosts(divConteudos)
+        listarPosts(divConteudos, 'geral')
     }
+    if(norte){
+        listarPosts(norte, 'norte')
+    }
+    if(nordeste){
+        listarPosts(nordeste, 'nordeste')
+    }
+    if(centroOeste){
+        listarPosts(centroOeste, 'centro-oeste')
+    }
+    if(sul){
+        listarPosts(sul, 'sul')
+    }
+    if(sudeste){
+        listarPosts(sudeste, 'sudeste')
+    }
+
     if(gerenciadorConteudos){
         gerenciarPosts(gerenciadorConteudos)
     }  
