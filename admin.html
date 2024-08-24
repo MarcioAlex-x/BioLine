@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BioLine</title>
+  <!-- aos animate -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Descrução -->
   <meta name="description" content="Coloque uma descrição aqui...">
   <!-- Estilo Bootstrap -->
@@ -52,7 +54,7 @@
             <a class="nav-link" href="ongs.html">ONGs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registros.html">Blog</a>
+            <a class="nav-link" href="blog.html">Blog</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="denuncias.html">Denuncias</a>
@@ -107,6 +109,7 @@
     <input type="date" class="form-control mb-3 data-publicacao-post" placeholder="Informe a data..." required>
     <label class="form-label text-success fw-bold" >Categoria</label>
     <select class="form-control post-categoria mb-3">
+      <option value="geral">Geral</option>
       <option value="norte">Norte</option>
       <option value="nordeste">Nordeste</option>
       <option value="centro-oeste">Centro-oeste</option>
@@ -144,6 +147,11 @@
   <script src="./assets/js/auth.js" type="module"></script>
   
   <script type="module" src="./assets/js/database.js"></script>
+  <!-- scripts AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 
 </body>
 

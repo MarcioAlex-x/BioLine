@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 postsIds.forEach((postId) =>{
                     const post = posts[postId]
                     const postElement = document.createElement('div')
-                    if(categoria === 'geral' || categoria === categoria){
+                    if(categoria === 'geral' || post.categoria === categoria){
                         dadosPost(postElement, post)
                     }
                     
